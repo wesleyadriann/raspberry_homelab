@@ -3,33 +3,31 @@ services:
   archi_steam_farm:
     container_name: archi_steam_farm
     image: justarchi/archisteamfarm:released
-    # ports:
-    #   - "1242:1242"
     volumes:
       - ./archi_steam_farm_config:/app/config
   nginx:
     container_name: nginx
-    image: nginx
+    build: ./nginx
     ports:
       - 3333:80
-    volumes:
-      - ./nginx/:/etc/nginx/
-  pi_hole:
-    container_name: pi_hole
-    image: pihole/pihole:latest
-    ports:
-      - 53:53
-      - 80:80
-    environment:
-      - TZ=America/Sao_Paulo
-      - VIRTUAL_HOST=pi.hole
-      - PROXY_LOCATION=pi.hole
-      - ServerIP=192.0.0.1
-    volumes:
-      - ./pihole_storage/etc-pihole:/etc/pihole
-      - ./pihole_storage/etc-dnsmasq.d:/etc/dnsmasq.d
-    dns:
-      - 127.0.0.1
-      - 1.1.1.1
-    restart: unless-stopped
-    hostname: pi.hole
+    depends_on:
+      - archi_steam_farm
+  # pi_hole:
+  #   container_name: pi_hole
+  #   image: pihole/pihole:latest
+  #   ports:
+  #     - 53:53
+  #     - 80:80
+  #   environment:
+  #     - TZ=America/Sao_Paulo
+  #     - VIRTUAL_HOST=pi.hole
+  #     - PROXY_LOCATION=pi.hole
+  #     - ServerIP=192.0.0.1
+  #   volumes:
+  #     - ./pihole_storage/etc-pihole:/etc/pihole
+  #     - ./pihole_storage/etc-dnsmasq.d:/etc/dnsmasq.d
+  #   dns:
+  #     - 127.0.0.1
+  #     - 1.1.1.1
+  #   restart: unless-stopped
+  #   hostname: pi.hole

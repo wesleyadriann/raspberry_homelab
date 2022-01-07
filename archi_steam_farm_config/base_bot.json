@@ -1,10 +1,10 @@
 {
-    "AutoSteamSaleEvent": true,
-    "Enabled": true,
-    "GamesPlayedWhileIdle": [
-      753
-    ],
-    "OnlineStatus": 7,
-    "SteamLogin": "",
-    "SteamPassword": ""
-  }
+  "AutoSteamSaleEvent": true,
+  "Enabled": true,
+  "GamesPlayedWhileIdle": [
+    753
+  ],
+  "OnlineStatus": 7,
+  "SteamLogin": "",
+  "SteamPassword": ""
+}
