@@ -16,8 +16,10 @@ services:
     container_name: pi_hole
     image: pihole/pihole:latest
     ports:
-      - 53:53
-      - 80:80
+      - 53:53/tcp
+      - 53:53/udp
+      - 67:67/udp
+      - 80:80/tcp
     environment:
       - TZ=America/Sao_Paulo
       - VIRTUAL_HOST=pi.hole
