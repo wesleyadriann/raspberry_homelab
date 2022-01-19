@@ -33,3 +33,9 @@ services:
       - 1.1.1.1
     restart: unless-stopped
     hostname: pi.hole
+  # control_fan:
+  #   container_name: control_fan
+  #   build: ./control_fan
+  #   devices:
+  #     - /dev/gpiomem:/dev/gpiomem
+  #   network_mode: "host"

@@ -1,4 +1,7 @@
-FROM woahbase/alpine-rpigpio:aarch64
+FROM ubuntu
+
+RUN apt-get update && \ 
+    apt-get install -y libsystemd-dev python3 python3-dev python3-pip
 
 COPY ./requirements.txt /requirements.txt
 

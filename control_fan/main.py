@@ -1,41 +1,35 @@
 
 # -*- coding: utf-8 -*-
 
-from gpiozero import OutputDevice
+from gpiozero import OutputDevice, CPUTemperature
 import time
+import logging as log
 
 ON_FAN_TEMP = 55
 OFF_FAN_TEMP = 45
 SLEEP_INTERVAL = 5
-GPIO_PIN = 7
+GPIO_PIN = 4
 
-def log(origin, value):
-    print(f'[{time.asctime()}]:[{origin}]: {value}')
-
-def get_temperature():
-    f = open("/sys/class/thermal/thermal_zone0/temp", "r")
-    temp = f.read()
-    f.close()
-    temperature = temp[:2]
-    log('get_temperature', )
-    return int(temp[:2])
-
+def logConfig(tag, value):
+   log.basicConfig(level=log.INFO)
 
 def main():
     fan = OutputDevice(GPIO_PIN)
     while True:
-        temp = get_temperature()
+        temp = CPUTemperature().temperature
+        log.info(f'temperature - {temp} C')
 
-        if(temp >= ON_FAN_TEMP and temp.value == 0):
-            log('main', 'fan on')
+        if(temp >= ON_FAN_TEMP and fan.value == 0):
+            log.info('main - fan on')
             fan.on()
 
-        if(temp <= OFF_FAN_TEMP and temp.value == 1):
-            log('main', 'fan off')
+        if(temp <= OFF_FAN_TEMP and fan.value == 1):
+            log.info('main - fan off')
             fan.off()
 
         time.sleep(SLEEP_INTERVAL)
 
 
 if __name__ == '__main__':
+    logConfig()
     main()
