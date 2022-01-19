@@ -26,7 +26,7 @@ if using ArchiSteamFarm put the settings in ./archi_steam_farm_config ([setting 
 
 ### Running
 ```sh
-docker-compose up --build
+docker-compose up --build &
 ```
 
 ### Additional information
