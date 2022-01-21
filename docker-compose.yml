@@ -39,3 +39,9 @@ services:
   #   devices:
   #     - /dev/gpiomem:/dev/gpiomem
   #   network_mode: "host"
+  # samba:
+  #   container_name: samba
+  #   image: servercontainers/samba
+  #   volumes:
+  #     - /DRIVE:
+
