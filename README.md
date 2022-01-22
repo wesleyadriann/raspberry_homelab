@@ -31,7 +31,7 @@
 
 ### Setting up (optional)
 
-Docker - disable unnecessary software steps in docker-compose.yml 
+Docker - disable unnecessary software steps in docker-compose.yml  
 ArchiSteamFarm - put the settings in ./archi_steam_farm_config ([setting up](https://github.com/JustArchiNET/ArchiSteamFarm/wiki/Setting-up))  
 Samba - set user and local to share in enviorement variables ([setting up](https://github.com/ServerContainers/samba#environment-variables-and-defaults))  
 
