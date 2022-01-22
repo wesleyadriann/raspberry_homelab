@@ -39,9 +39,18 @@ services:
   #   devices:
   #     - /dev/gpiomem:/dev/gpiomem
   #   network_mode: "host"
-  # samba:
-  #   container_name: samba
-  #   image: servercontainers/samba
-  #   volumes:
-  #     - /DRIVE:
-
+  samba:
+    container_name: samba
+    image: servercontainers/samba
+    network_mode: host
+    restart: always
+    hostname: storage
+    cap_add:
+      - CAP_NET_ADMIN
+    volumes:
+      - /DRIVE/share/:/shares
+      - /DRIVE/avahi/:/external/avahi
+    environment:
+      - ACCOUNT_foouser=foopass
+      - AVAHI_NAME=StorageServer
+      - SAMBA_VOLUME_CONFIG_shared_home=[Share]; path=/shares;  valid users = foouser; guest ok = yes; read only = no; browseable = yes
