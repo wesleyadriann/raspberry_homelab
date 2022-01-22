@@ -14,15 +14,26 @@
 
 ### Softwares
 
-- [ArchiSteamFarm](https://github.com/JustArchiNET/ArchiSteamFarm)
-- [Pi-hole](https://pi-hole.net)
-- [Nginx](https://www.nginx.com) 
+- [ArchiSteamFarm](https://github.com/JustArchiNET/ArchiSteamFarm) ✔️
+- [Pi-hole](https://pi-hole.net) ✔️
+- [Nginx](https://www.nginx.com) ✔️
+- [Samba](https://www.samba.org) ⚠️
+
+✔️ Done | ⚠️ Doing
+
+### Docker Images
+
+- [ArchiSteamFarm](https://hub.docker.com/r/justarchi/archisteamfarm)
+- [Pi-hole](https://hub.docker.com/r/pihole/pihole)
+- [Nginx](https://hub.docker.com/_/nginx)
+- [Samba](https://hub.docker.com/r/servercontainers/samba)
 
 
 ### Setting up (optional)
 
-disable unnecessary software steps in docker-compose.yml  
-if using ArchiSteamFarm put the settings in ./archi_steam_farm_config ([setting up](https://github.com/JustArchiNET/ArchiSteamFarm/wiki/Setting-up))
+Docker - disable unnecessary software steps in docker-compose.yml 
+ArchiSteamFarm - put the settings in ./archi_steam_farm_config ([setting up](https://github.com/JustArchiNET/ArchiSteamFarm/wiki/Setting-up))  
+Samba - set user and local to share in enviorement variables ([setting up](https://github.com/ServerContainers/samba#environment-variables-and-defaults))  
 
 ### Running
 ```sh
