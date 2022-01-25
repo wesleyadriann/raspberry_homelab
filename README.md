@@ -22,8 +22,7 @@
 
 
 #### :warning: Pending
-- [Samba](https://www.samba.org)
-- [FileRun](https://filerun.com)
+- [Samba](https://www.samba.org) or [FileRun](https://filerun.com) or [File Browser](https://filebrowser.org/)  
 
 ### Docker Images
 
@@ -33,7 +32,7 @@
 - [Heimdall](https://hub.docker.com/r/linuxserver/heimdall)
 - [Samba](https://hub.docker.com/r/servercontainers/samba)
 - [FileRun](https://hub.docker.com/r/filerun/filerun)
-
+- [File Browser](https://hub.docker.com/r/filebrowser/filebrowser)
 
 
 ### Setting up
