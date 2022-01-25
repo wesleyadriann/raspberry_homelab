@@ -7,6 +7,9 @@ services:
       - ./archi_steam_farm_config:/app/config
     ports:
       - 1242:1242
+    environment:
+      - TZ=America/Sao_Paulo
+
   pi_hole:
     container_name: pi_hole
     image: pihole/pihole:latest
@@ -28,6 +31,7 @@ services:
       - 1.1.1.1
     restart: unless-stopped
     hostname: pi.hole
+
   dozzle:
     container_name: dozzle
     image: amir20/dozzle:latest
@@ -36,6 +40,21 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     ports:
       - 9999:8080
+
+  heimdall:
+    container_name: heimdall
+    image: linuxserver/heimdall
+    restart: always
+    volumes:
+      - ./heimdall_config:/config
+    environment:
+      - PGID=1001
+      - PUID=1001
+      - TZ=America/Sao_Paulo
+    ports:
+      - 8080:80
+      - 8443:443
+
   # control_fan:
   #   container_name: control_fan
   #   build: ./control_fan
