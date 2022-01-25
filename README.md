@@ -11,12 +11,11 @@
 </p>
 
 
-
 ### Softwares
 
 - [ArchiSteamFarm](https://github.com/JustArchiNET/ArchiSteamFarm) ✔️
 - [Pi-hole](https://pi-hole.net) ✔️
-- [Nginx](https://www.nginx.com) ✔️
+- [Dozzle](https://dozzle.dev/) ✔️
 - [Samba](https://www.samba.org) ⚠️
 
 ✔️ Done | ⚠️ Doing
@@ -25,7 +24,7 @@
 
 - [ArchiSteamFarm](https://hub.docker.com/r/justarchi/archisteamfarm)
 - [Pi-hole](https://hub.docker.com/r/pihole/pihole)
-- [Nginx](https://hub.docker.com/_/nginx)
+- [Dozzle](https://hub.docker.com/r/amir20/dozzle/)
 - [Samba](https://hub.docker.com/r/servercontainers/samba)
 
 

@@ -5,13 +5,8 @@ services:
     image: justarchi/archisteamfarm:released
     volumes:
       - ./archi_steam_farm_config:/app/config
-  nginx:
-    container_name: nginx
-    build: ./nginx
     ports:
-      - 3333:80
-    depends_on:
-      - archi_steam_farm
+      - 1242:1242
   pi_hole:
     container_name: pi_hole
     image: pihole/pihole:latest
@@ -33,24 +28,33 @@ services:
       - 1.1.1.1
     restart: unless-stopped
     hostname: pi.hole
+  dozzle:
+    container_name: dozzle
+    image: amir20/dozzle:latest
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 9999:8080
   # control_fan:
   #   container_name: control_fan
   #   build: ./control_fan
   #   devices:
   #     - /dev/gpiomem:/dev/gpiomem
   #   network_mode: "host"
-  samba:
-    container_name: samba
-    image: servercontainers/samba
-    network_mode: host
-    restart: always
-    hostname: storage
-    cap_add:
-      - CAP_NET_ADMIN
-    volumes:
-      - /DRIVE/share/:/shares
-      - /DRIVE/avahi/:/external/avahi
-    environment:
-      - ACCOUNT_foouser=foopass
-      - AVAHI_NAME=StorageServer
-      - SAMBA_VOLUME_CONFIG_shared_home=[Share]; path=/shares;  valid users = foouser; guest ok = yes; read only = no; browseable = yes
+
+  # samba:
+  #   container_name: samba
+  #   image: servercontainers/samba
+  #   network_mode: host
+  #   restart: always
+  #   hostname: storage
+  #   cap_add:
+  #     - CAP_NET_ADMIN
+  #   volumes:
+  #     - /DRIVE/share/:/shares
+  #     - /DRIVE/avahi/:/external/avahi
+  #   environment:
+  #     - ACCOUNT_foouser=foopass
+  #     - AVAHI_NAME=StorageServer
+  #     - SAMBA_VOLUME_CONFIG_shared_home=[Share]; path=/shares;  valid users = foouser; guest ok = yes; read only = no; browseable = yes
