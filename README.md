@@ -18,11 +18,16 @@
 - [ArchiSteamFarm](https://github.com/JustArchiNET/ArchiSteamFarm) 
 - [Pi-hole](https://pi-hole.net) 
 - [Dozzle](https://dozzle.dev) 
-- [Heimdall](https://heimdall.site) 
+- [Dashy](https://dashy.to)
 
 
 #### :warning: Pending
-- [Samba](https://www.samba.org) or [FileRun](https://filerun.com) or [File Browser](https://filebrowser.org/)  
+- [Samba](https://www.samba.org) or [FileRun](https://filerun.com) or [File Browser](https://filebrowser.org/)
+
+#### :no_entry: Removed 
+
+- [Nginx](https://www.nginx.com) - [a82f7e2](https://github.com/WesleyAdriann/raspberry_giggle/blob/a82f7e2b02088823827561bfaa57392fcde46c82/docker-compose.yml#L8)
+- [Heimdall](https://heimdall.site)- [d7baec8](https://github.com/WesleyAdriann/raspberry_giggle/blob/d7baec8b0dc60371e9867791434eceb58bde9675/docker-compose.yml#L47)
 
 ### Docker Images
 
@@ -33,6 +38,9 @@
 - [Samba](https://hub.docker.com/r/servercontainers/samba)
 - [FileRun](https://hub.docker.com/r/filerun/filerun)
 - [File Browser](https://hub.docker.com/r/filebrowser/filebrowser)
+- [Nginx](https://hub.docker.com/_/nginx)
+- [Dashy](https://hub.docker.com/r/lissy93/dashy)
+
 
 
 ### Setting up
@@ -51,7 +59,7 @@ docker-compose up --build &
 
 #### Web interface
 
-Heimdall: [http://localhost:8080](http://localhost:8080)  
+Dashy: [http://localhost:8080](http://localhost:4000)  
 ArchiSteamFarm IPC: [http://localhost:3333](http://localhost:3333)  
 Pi-hole admin: [http://localhost/admin](http://localhost/admin)  
 Dozzle: [http://localhost:9999](http://localhost:9999)  
