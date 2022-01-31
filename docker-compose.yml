@@ -44,22 +44,18 @@ services:
     depends_on:
       - pi_hole
 
-  heimdall:
-    container_name: heimdall
-    image: linuxserver/heimdall
+  dashy:
+    container_name: dashy
+    image: lissy93/dashy:latest
     restart: always
     volumes:
-      - ./heimdall_config:/config
+      - ./dashy_config/conf.yml:/app/public/conf.yml
     environment:
-      - PGID=1001
-      - PUID=1001
       - TZ=America/Sao_Paulo
     ports:
-      - 8080:80
-      - 8443:443
+      - 4000:80
     depends_on:
       - pi_hole
-
   # control_fan:
   #   container_name: control_fan
   #   build: ./control_fan
