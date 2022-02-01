@@ -47,7 +47,7 @@ services:
   dashy:
     container_name: dashy
     image: lissy93/dashy:latest
-    restart: always
+    restart: unless-stopped
     volumes:
       - ./dashy_config/conf.yml:/app/public/conf.yml
     environment:
@@ -56,25 +56,24 @@ services:
       - 4000:80
     depends_on:
       - pi_hole
-  # control_fan:
+ 
+  file_browser:
+    container_name: file_browser
+    image: filebrowser/filebrowser
+    restart: unless-stopped
+    volumes:
+      - /DRIVE/share:/srv
+      - ./file_browser_config/database.db:/database.db
+    environment:
+      - TZ=America/Sao_Paulo
+    ports:
+      - 8080:80
+    depends_on:
+      - pi_hole
+
+        # control_fan:
   #   container_name: control_fan
   #   build: ./control_fan
   #   devices:
   #     - /dev/gpiomem:/dev/gpiomem
   #   network_mode: "host"
-
-  # samba:
-  #   container_name: samba
-  #   image: servercontainers/samba
-  #   network_mode: host
-  #   restart: always
-  #   hostname: storage
-  #   cap_add:
-  #     - CAP_NET_ADMIN
-  #   volumes:
-  #     - /DRIVE/share/:/shares
-  #     - /DRIVE/avahi/:/external/avahi
-  #   environment:
-  #     - ACCOUNT_foouser=foopass
-  #     - AVAHI_NAME=StorageServer
-  #     - SAMBA_VOLUME_CONFIG_shared_home=[Share]; path=/shares;  valid users = foouser; guest ok = yes; read only = no; browseable = yes

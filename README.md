@@ -19,10 +19,10 @@
 - [Pi-hole](https://pi-hole.net) 
 - [Dozzle](https://dozzle.dev) 
 - [Dashy](https://dashy.to)
-
+- [File Browser](https://filebrowser.org/)
 
 #### :warning: Pending
-- [Samba](https://www.samba.org) or [FileRun](https://filerun.com) or [File Browser](https://filebrowser.org/)
+- torrent web
 
 #### :no_entry: Removed 
 
@@ -35,8 +35,6 @@
 - [Pi-hole](https://hub.docker.com/r/pihole/pihole)
 - [Dozzle](https://hub.docker.com/r/amir20/dozzle/)
 - [Heimdall](https://hub.docker.com/r/linuxserver/heimdall)
-- [Samba](https://hub.docker.com/r/servercontainers/samba)
-- [FileRun](https://hub.docker.com/r/filerun/filerun)
 - [File Browser](https://hub.docker.com/r/filebrowser/filebrowser)
 - [Nginx](https://hub.docker.com/_/nginx)
 - [Dashy](https://hub.docker.com/r/lissy93/dashy)
@@ -47,8 +45,7 @@
 
 Docker - disable unnecessary software steps in docker-compose.yml  
 ArchiSteamFarm - put the settings in ./archi_steam_farm_config ([setting up](https://github.com/JustArchiNET/ArchiSteamFarm/wiki/Setting-up))  
-Samba - set user and local to share in environment variables ([setting up](https://github.com/ServerContainers/samba#environment-variables-and-defaults))  
-Heimdall - set environment variables (PGID and PUID, executing ```id``` in terminal)  
+File Browser - setting up location to save file
 
 ### Running
 ```sh
