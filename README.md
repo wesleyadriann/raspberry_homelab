@@ -1,5 +1,5 @@
 <h1 align="center">
-    Raspberry Giggle
+    Raspberry Containers
 </h1>
 <h4 align="center">
     Raspberry server docker softwares
@@ -49,7 +49,7 @@ File Browser - setting up location to save file
 
 ### Running
 ```sh
-docker-compose up --build &
+docker-compose up --build -d
 ```
 
 ### Additional information
