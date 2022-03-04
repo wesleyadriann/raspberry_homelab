@@ -2,7 +2,7 @@ version: '3'
 services:
   archi_steam_farm:
     container_name: archi_steam_farm
-    image: justarchi/archisteamfarm:released
+    image: justarchi/archisteamfarm:latest
     volumes:
       - ./archi_steam_farm_config:/app/config
     ports:
