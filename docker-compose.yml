@@ -32,6 +32,9 @@ services:
       - ./pihole_storage/etc-dnsmasq.d:/etc/dnsmasq.d
     restart: unless-stopped
     hostname: pi.hole
+    dns:
+      - 127.0.0.1
+      - 8.8.8.8
 
   dozzle:
     container_name: dozzle
