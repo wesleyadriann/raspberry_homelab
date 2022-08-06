@@ -21,7 +21,7 @@ services:
     ports:
       - 53:53/tcp
       - 53:53/udp
-      - 80:80/tcp
+      - 8081:80/tcp
     environment:
       - TZ=America/Sao_Paulo
       - VIRTUAL_HOST=pi.hole
@@ -74,21 +74,21 @@ services:
     depends_on:
       - pi_hole
 
-  homebridge:
-    container_name: homebridge
-    image: oznu/homebridge:latest
-    restart: unless-stopped
-    network_mode: host
-    environment:
-      - PGID=1001
-      - PUID=1001
-      - HOMEBRIDGE_CONFIG_UI=1
-      - HOMEBRIDGE_CONFIG_UI_PORT=8581
-      - TZ=America/Sao_Paulo
-    volumes:
-      - ./homebridge_config:/homebridge
-    depends_on:
-      - pi_hole
+        #  homebridge:
+        #container_name: homebridge
+        #image: oznu/homebridge:latest
+        # restart: unless-stopped
+        #network_mode: host
+        #environment:
+        #- PGID=1001
+        #- PUID=1001
+        #- HOMEBRIDGE_CONFIG_UI=1
+        #- HOMEBRIDGE_CONFIG_UI_PORT=8581
+        #- TZ=America/Sao_Paulo
+        #volumes:
+        #- ./homebridge_config:/homebridge
+        #depends_on:
+        #- pi_hole
 
         # control_fan:
   #   container_name: control_fan
