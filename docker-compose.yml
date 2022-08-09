@@ -28,6 +28,7 @@ services:
       - VIRTUAL_HOST=pi.hole
       - PROXY_LOCATION=pi.hole
       - ServerIP=192.0.0.1
+      - CUSTOM_CACHE_SIZE=20000
     volumes:
       - ./pihole_storage/etc-pihole:/etc/pihole
       - ./pihole_storage/etc-dnsmasq.d:/etc/dnsmasq.d
