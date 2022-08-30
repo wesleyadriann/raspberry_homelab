@@ -11,8 +11,7 @@ services:
     environment:
       - TZ=America/Sao_Paulo
     dns:
-      - 8.8.8.8
-      - 8.8.4.4
+      - 1.1.1.1
     depends_on:
       - pi_hole
 
@@ -25,18 +24,10 @@ services:
       - 8081:80/tcp
     environment:
       - TZ=America/Sao_Paulo
-      - VIRTUAL_HOST=pi.hole
-      - PROXY_LOCATION=pi.hole
-      - ServerIP=192.0.0.1
-      - CUSTOM_CACHE_SIZE=20000
     volumes:
       - ./pihole_storage/etc-pihole:/etc/pihole
       - ./pihole_storage/etc-dnsmasq.d:/etc/dnsmasq.d
     restart: unless-stopped
-    hostname: pi.hole
-    dns:
-      - 127.0.0.1
-      - 8.8.8.8
 
   dozzle:
     container_name: dozzle
@@ -76,23 +67,47 @@ services:
     depends_on:
       - pi_hole
 
-        #  homebridge:
-        #container_name: homebridge
-        #image: oznu/homebridge:latest
-        # restart: unless-stopped
-        #network_mode: host
-        #environment:
-        #- PGID=1001
-        #- PUID=1001
-        #- HOMEBRIDGE_CONFIG_UI=1
-        #- HOMEBRIDGE_CONFIG_UI_PORT=8581
-        #- TZ=America/Sao_Paulo
-        #volumes:
-        #- ./homebridge_config:/homebridge
-        #depends_on:
-        #- pi_hole
+  # netdata:
+  #   image: netdata/netdata
+  #   container_name: netdata
+  #   ports:
+  #     - 1999:19999
+  #   restart: unless-stopped
+  #   cap_add:
+  #     - SYS_PTRACE
+  #   security_opt:
+  #     - apparmor:unconfined
+  #   volumes:
+  #     - ./netdata_config/netdata:/etc/netdata:ro
+  #     - netdatalib:/var/lib/netdata
+  #     - netdatacache:/var/cache/netdata
+  #     - /etc/passwd:/host/etc/passwd:ro
+  #     - /etc/group:/host/etc/group:ro
+  #     - /proc:/host/proc:ro
+  #     - /sys:/host/sys:ro
+  #     - /etc/os-release:/host/etc/os-release:ro
+  #   environment:
+  #     - TZ=America/Sao_Paulo
+  #   depends_on:
+  #     - pi_hole
 
-        # control_fan:
+  # homebridge:
+  #   container_name: homebridge
+  #   image: oznu/homebridge:latest
+  #   restart: unless-stopped
+  #   network_mode: host
+  #   environment:
+  #     - PGID=1001
+  #     - PUID=1001
+  #     - HOMEBRIDGE_CONFIG_UI=1
+  #     - HOMEBRIDGE_CONFIG_UI_PORT=8581
+  #     - TZ=America/Sao_Paulo
+  #   volumes:
+  #     - ./homebridge_config:/homebridge
+  #   depends_on:
+  #     - pi_hole
+
+  # control_fan:
   #   container_name: control_fan
   #   build: ./control_fan
   #   devices:
