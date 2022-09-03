@@ -28,6 +28,8 @@ services:
       - ./pihole_storage/etc-pihole:/etc/pihole
       - ./pihole_storage/etc-dnsmasq.d:/etc/dnsmasq.d
     restart: unless-stopped
+    dns:
+      - 127.0.0.1
 
   dozzle:
     container_name: dozzle
