@@ -6,4 +6,4 @@
 
 !.gitKeep
 
-/heimdall_config
+*.cache
