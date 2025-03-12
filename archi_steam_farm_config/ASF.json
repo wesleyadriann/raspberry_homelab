@@ -1,5 +1,4 @@
 {
   "Headless": true,
-  "IPCPassword": "",
-  "SteamOwnerID": 0
+  "IPCPassword": ""
 }

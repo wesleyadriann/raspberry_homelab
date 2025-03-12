@@ -1,18 +1,18 @@
 services:
-  archi_steam_farm:
-    container_name: archi_steam_farm
-    image: justarchi/archisteamfarm:latest
-    volumes:
-      - ./archi_steam_farm_config:/app/config
-    ports:
-      - 1242:1242
-    restart: unless-stopped
-    environment:
-      - TZ=America/Sao_Paulo
-    dns:
-      - 1.1.1.1
-    depends_on:
-      - pi_hole
+  # archi_steam_farm:
+  #   container_name: archi_steam_farm
+  #   image: justarchi/archisteamfarm:latest
+  #   volumes:
+  #     - ./archi_steam_farm_config:/app/config
+  #   ports:
+  #     - 1242:1242
+  #   restart: unless-stopped
+  #   environment:
+  #     - TZ=America/Sao_Paulo
+  #   dns:
+  #     - 1.1.1.1
+  #   depends_on:
+  #     - pi_hole
 
   pi_hole:
     container_name: pi_hole
@@ -21,9 +21,10 @@ services:
       - 53:53/tcp
       - 53:53/udp
       - 8081:80/tcp
+      - 443:443/tcp
     environment:
       - TZ=America/Sao_Paulo
-      - WEBPASSWORD=password
+      # - FTLCONF_webserver_api_password=password
     volumes:
       - ./pihole_storage/etc-pihole:/etc/pihole
       - ./pihole_storage/etc-dnsmasq.d:/etc/dnsmasq.d
@@ -86,6 +87,8 @@ services:
       - 8090:8090
       - 6881:6881
       - 6881:6881/udp
+    dns:
+      - 1.1.1.1
 
   homeassistant:
     container_name: homeassistant
@@ -97,7 +100,18 @@ services:
     restart: unless-stopped
     privileged: true
     network_mode: host
-        
+
+  jellyfin:
+    image: jellyfin/jellyfin
+    container_name: jellyfin
+    ports:
+      - 8096:8096
+    volumes:
+      - /home/wesley/remote_docs/share/wesley/torrent:/media
+      - ./jellyfin/config:/config
+      - ./jellyfin/cache:/cache
+    restart: unless-stopped
+
   # netdata:
   #   image: netdata/netdata
   #   container_name: netdata
