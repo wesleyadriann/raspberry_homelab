@@ -1,19 +1,4 @@
 services:
-  # archi_steam_farm:
-  #   container_name: archi_steam_farm
-  #   image: justarchi/archisteamfarm:latest
-  #   volumes:
-  #     - ./archi_steam_farm_config:/app/config
-  #   ports:
-  #     - 1242:1242
-  #   restart: unless-stopped
-  #   environment:
-  #     - TZ=America/Sao_Paulo
-  #   dns:
-  #     - 1.1.1.1
-  #   depends_on:
-  #     - pi_hole
-
   pi_hole:
     container_name: pi_hole
     image: pihole/pihole:latest
@@ -24,10 +9,10 @@ services:
       - 443:443/tcp
     environment:
       - TZ=America/Sao_Paulo
-      # - FTLCONF_webserver_api_password=password
+      - FTLCONF_webserver_api_password=password
     volumes:
-      - ./pihole_storage/etc-pihole:/etc/pihole
-      - ./pihole_storage/etc-dnsmasq.d:/etc/dnsmasq.d
+      - ./config/pihole/etc-pihole:/etc/pihole
+      - ./config/pihole/etc-dnsmasq.d:/etc/dnsmasq.d
     restart: unless-stopped
     dns:
       - 127.0.0.1
@@ -39,7 +24,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     ports:
-      - 9999:8080
+      - 8082:8080
     depends_on:
       - pi_hole
 
@@ -48,11 +33,11 @@ services:
     image: lissy93/dashy:latest
     restart: unless-stopped
     volumes:
-      - ./dashy_config/conf.yml:/app/user-data/conf.yml
+      - ./config/dashy/conf.yml:/app/user-data/conf.yml
     environment:
       - TZ=America/Sao_Paulo
     ports:
-      - 4000:8080
+      - 8083:8080
     depends_on:
       - pi_hole
  
@@ -61,12 +46,12 @@ services:
     image: filebrowser/filebrowser
     restart: unless-stopped
     volumes:
-      - /home/wesley/remote_docs/share:/srv
-      - ./file_browser_config/database.db:/database.db
+      - $HOME/remote_docs/share:/srv
+      - ./config/file_browser/database.db:/database.db
     environment:
       - TZ=America/Sao_Paulo
     ports:
-      - 8080:80
+      - 8084:80
     depends_on:
       - pi_hole
 
@@ -75,8 +60,8 @@ services:
     image: lscr.io/linuxserver/qbittorrent:latest
     restart: unless-stopped
     volumes:
-      - ./config_qbittorrent:/config
-      - /home/wesley/remote_docs/share/wesley/torrent:/downloads
+      - ./config/qbittorrent:/config
+      - $HOME/remote_docs/share/wesley/torrent:/downloads
     environment:
       - PUID=1000
       - PGID=1000
@@ -84,7 +69,7 @@ services:
       - TZ=America/Sao_Paulo
       - TORRENTING_PORT=6881
     ports:
-      - 8090:8090
+      - 8085:8090
       - 6881:6881
       - 6881:6881/udp
     dns:
@@ -94,7 +79,7 @@ services:
     container_name: homeassistant
     image: "ghcr.io/home-assistant/home-assistant:stable"
     volumes:
-      - ./home_assistant:/config
+      - ./config/home_assistant:/config
       - /etc/localtime:/etc/localtime:ro
       - /run/dbus:/run/dbus:ro
     restart: unless-stopped
@@ -104,57 +89,33 @@ services:
   jellyfin:
     image: jellyfin/jellyfin
     container_name: jellyfin
-    ports:
-      - 8096:8096
+    network_mode: 'host'
     volumes:
-      - /home/wesley/remote_docs/share/wesley/torrent:/media
-      - ./jellyfin/config:/config
-      - ./jellyfin/cache:/cache
+      - ./config/jellyfin/config:/config
+      - ./config/jellyfin/cache:/cache
+      - type: bind
+        source: $HOME/remote_docs/share/wesley/torrent
+        target: /media
+    restart: 'unless-stopped'
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+
+  emulatorjs:
+    image: lscr.io/linuxserver/emulatorjs:latest
+    container_name: emulatorjs
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Sao_Paulo
+      - SUBFOLDER=/
+      # - DISABLE_IPFS=true
+    volumes:
+      - ./config/emulatorjs:/config
+      - $HOME/remote_docs/share/wesley/roms:/data
+    ports:
+      - 8087:3000
+      - 8086:80
+      - 4001:4001
     restart: unless-stopped
-
-  # netdata:
-  #   image: netdata/netdata
-  #   container_name: netdata
-  #   ports:
-  #     - 1999:19999
-  #   restart: unless-stopped
-  #   cap_add:
-  #     - SYS_PTRACE
-  #   security_opt:
-  #     - apparmor:unconfined
-  #   volumes:
-  #     - ./netdata_config/netdata:/etc/netdata:ro
-  #     - netdatalib:/var/lib/netdata
-  #     - netdatacache:/var/cache/netdata
-  #     - /etc/passwd:/host/etc/passwd:ro
-  #     - /etc/group:/host/etc/group:ro
-  #     - /proc:/host/proc:ro
-  #     - /sys:/host/sys:ro
-  #     - /etc/os-release:/host/etc/os-release:ro
-  #   environment:
-  #     - TZ=America/Sao_Paulo
-  #   depends_on:
-  #     - pi_hole
-
-  # homebridge:
-  #   container_name: homebridge
-  #   image: oznu/homebridge:latest
-  #   restart: unless-stopped
-  #   network_mode: host
-  #   environment:
-  #     - PGID=1001
-  #     - PUID=1001
-  #     - HOMEBRIDGE_CONFIG_UI=1
-  #     - HOMEBRIDGE_CONFIG_UI_PORT=8581
-  #     - TZ=America/Sao_Paulo
-  #   volumes:
-  #     - ./homebridge_config:/homebridge
-  #   depends_on:
-  #     - pi_hole
-
-  # control_fan:
-  #   container_name: control_fan
-  #   build: ./control_fan
-  #   devices:
-  #     - /dev/gpiomem:/dev/gpiomem
-  #   network_mode: "host"
+    dns:
+      - 1.1.1.1

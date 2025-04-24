@@ -1,9 +1,3 @@
-*.db
-*.bin
-
-/pihole_storage/etc-pihole
-/pihole_storage/etc-dnsmasq.d
-
 !.gitKeep
 
-*.cache
+/config/*/*
