@@ -68,4 +68,23 @@ Homebridge
 
 EmulatorJs (deprecated)
 ```
+  emulatorjs:
+    image: linuxserver/emulatorjs:arm64v8-latest
+    container_name: emulatorjs
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Sao_Paulo
+      - SUBFOLDER=/
+      # - DISABLE_IPFS=true
+    volumes:
+      - ./config/emulatorjs:/config
+      - $HOME/remote_docs/share/wesley/roms:/data
+    ports:
+      - 8087:3000
+      - 8086:80
+      - 4001:4001
+    restart: unless-stopped
+    dns:
+      - 1.1.1.1
 ```
