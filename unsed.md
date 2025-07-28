@@ -45,6 +45,7 @@ Netdata
       - pi_hole
 ```
 
+Homebridge
 ```yml
   homebridge:
     container_name: homebridge
@@ -62,4 +63,9 @@ Netdata
     depends_on:
       - pi_hole
 
+```
+
+
+EmulatorJs (deprecated)
+```
 ```
